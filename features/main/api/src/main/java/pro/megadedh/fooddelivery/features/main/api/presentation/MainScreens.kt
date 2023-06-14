@@ -1,4 +1,4 @@
-package pro.megadedh.fooddelivery.features.main.api
+package pro.megadedh.fooddelivery.features.main.api.presentation
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 

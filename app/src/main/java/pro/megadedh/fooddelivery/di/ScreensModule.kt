@@ -9,7 +9,7 @@ import pro.megadedh.fooddelivery.features.account.api.AccountScreens
 import pro.megadedh.fooddelivery.features.account.ui.screens_impl.AccountScreensImpl
 import pro.megadedh.fooddelivery.features.basket.api.BasketScreens
 import pro.megadedh.fooddelivery.features.basket.ui.screens_impl.BasketScreensImpl
-import pro.megadedh.fooddelivery.features.main.api.MainScreens
+import pro.megadedh.fooddelivery.features.main.api.presentation.MainScreens
 import pro.megadedh.fooddelivery.features.main.ui.screens_impl.MainScreensImpl
 import pro.megadedh.fooddelivery.features.mainflow.navigaion.MainFlowScreen
 import pro.megadedh.fooddelivery.features.mainflow.navigaion.MainFlowScreenImpl
