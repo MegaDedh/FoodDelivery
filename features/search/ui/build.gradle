@@ -1,0 +1,33 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.features.search.ui'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+
+    // Feature dependencies
+    api (projects.features.search.api)
+    implementation (projects.features.search.presentation)
+
+    // Common dependencies
+    implementation (projects.core.ui)
+    implementation (projects.core.presentation)
+    implementation (projects.common.ui)
+
+    // Libs
+    implementation libs.bundles.commonBundle
+    implementation libs.bundles.uiBundle
+    implementation libs.androidxFragment
+    implementation libs.livedata
+    kapt           libs.hiltCompiler
+    implementation libs.coil
+    implementation libs.timber
+}

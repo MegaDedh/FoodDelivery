@@ -1,0 +1,23 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.common.utils'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+    implementation(projects.core.utils)
+
+    implementation libs.coroutinesCore
+
+    kapt           libs.hiltCompiler
+    implementation libs.hiltAndroid
+
+    implementation libs.timber
+}

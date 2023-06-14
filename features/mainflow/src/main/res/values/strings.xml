@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_main">Главная</string>
+    <string name="menu_main_search">Поиск</string>
+    <string name="menu_main_basket">Корзина</string>
+    <string name="menu_main_account">Аккаунт</string>
+</resources>

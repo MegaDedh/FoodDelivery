@@ -1,0 +1,31 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.common.ui'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+
+    // Common dependencies
+    api(projects.core.ui)
+    implementation(projects.core.utils)
+    implementation(projects.common.navigation)
+    implementation(projects.common.presentation)
+    implementation(projects.common.utils)
+
+    // Libs
+    implementation libs.bundles.commonBundle
+    implementation libs.bundles.uiBundle
+    implementation libs.androidxFragment
+    implementation libs.livedata
+    kapt           libs.hiltCompiler
+    implementation libs.coil
+    implementation libs.timber
+}

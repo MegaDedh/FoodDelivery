@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ActionToolbar">
+
+        <attr name="visibilityBackIcon" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <attr name="srcBackIcon" format="reference" />
+        <attr name="tintBackIcon" format="color" />
+
+        <attr name="toolbarTitleText" format="string" />
+        <attr name="toolbarTitleTextSize" format="dimension" />
+        <attr name="toolbarTitleTextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
+        <attr name="toolbarTitleTextAllCaps" format="boolean" />
+        <attr name="toolbarTitleMarquee" format="boolean" />
+
+        <attr name="visibilityAccountImage" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <attr name="accountImage" format="reference" />
+    </declare-styleable>
+</resources>

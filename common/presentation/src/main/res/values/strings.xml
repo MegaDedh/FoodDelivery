@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Network Exceptions -->
+    <string name="server_error">Ошибка сервера</string>
+    <string name="connection_error">Ошибка установки соединения</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+
+</resources>

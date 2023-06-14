@@ -1,0 +1,20 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+}
+
+android {
+    namespace 'pro.megadedh.core.ui'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+    implementation(projects.core.presentation)
+
+    implementation libs.coil
+    implementation libs.adapterDelegate
+
+    implementation libs.bundles.commonBundle
+    implementation libs.bundles.uiBundle
+}

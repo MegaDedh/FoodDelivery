@@ -1,0 +1,60 @@
+plugins {
+    alias libs.plugins.androidApplication
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+
+    implementation libs.bundles.commonBundle
+    implementation libs.constraintlayout
+    implementation libs.bundles.uiBundle
+    kapt libs.hiltCompiler
+
+    implementation libs.coroutinesAndroid
+    implementation libs.lifecycle
+    implementation libs.timber
+    //implementation libs.threetenabp
+    //implementation libs.startup
+//
+    implementation libs.bundles.testBundle
+//    implementation libs.bundles.moshiBundle
+//    implementation libs.bundles.retrofitBundle
+//
+//    implementation libs.datastore
+//    implementation libs.bundles.roomBundle
+
+    implementation(projects.common.presentation)
+    implementation(projects.common.navigation)
+    implementation(projects.common.utils)
+    implementation(projects.common.ui)
+    implementation(projects.common.data)
+
+    implementation(projects.core.ui)
+    implementation(projects.uikit)
+
+    implementation(projects.features.mainflow)
+
+    implementation(projects.features.main.api)
+    implementation(projects.features.main.presentation)
+    implementation(projects.features.main.ui)
+
+    implementation(projects.features.search.api)
+    implementation(projects.features.search.presentation)
+    implementation(projects.features.search.ui)
+
+    implementation(projects.features.basket.api)
+    implementation(projects.features.basket.presentation)
+    implementation(projects.features.basket.ui)
+
+    implementation(projects.features.account.api)
+    implementation(projects.features.account.presentation)
+    implementation(projects.features.account.ui)
+}

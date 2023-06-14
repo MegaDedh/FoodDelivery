@@ -1,0 +1,35 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.features.basket.presentation'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+
+    // Feature dependencies
+    api (projects.features.search.api)
+    //implementation (projects.features.search.domain)
+    //implementation (projects.features.search.data)
+
+    // Common dependencies
+    implementation (projects.common.data)
+    implementation (projects.common.navigation)
+    implementation (projects.core.presentation)
+    implementation (projects.core.utils)
+
+    // Libs
+    implementation libs.bundles.commonBundle
+    implementation libs.bundles.uiBundle
+    implementation libs.androidxFragment
+    implementation libs.livedata
+    implementation libs.bundles.moshiBundle
+    kapt libs.hiltCompiler
+    implementation libs.timber
+}

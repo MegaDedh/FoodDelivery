@@ -1,0 +1,18 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.features.main.api'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+
+    kapt           libs.hiltCompiler
+    implementation libs.hilt
+    implementation libs.cicerone
+}
