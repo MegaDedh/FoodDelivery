@@ -5,4 +5,6 @@ sealed class FeatureUiState {
     object Loading : FeatureUiState()
 
     class Success(val successData: Any) : FeatureUiState()
+
+    class Exception(val message: String) : FeatureUiState()
 }

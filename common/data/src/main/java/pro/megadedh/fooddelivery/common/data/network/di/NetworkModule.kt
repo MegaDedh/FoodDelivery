@@ -15,7 +15,6 @@ import pro.megadedh.fooddelivery.common.data.network.di.NetworkModule.UrlVersion
 import pro.megadedh.fooddelivery.common.data.network.di.NetworkModule.UrlVersions.RELEASE_DOMAIN
 import pro.megadedh.fooddelivery.common.data.network.executor.suspend.SuspendRequestExecutor
 import pro.megadedh.fooddelivery.common.data.network.executor.suspend.SuspendRequestExecutorImpl
-import pro.megadedh.fooddelivery.common.data.network.interceptor.TokenHeaderInterceptor
 import pro.megadedh.fooddelivery.common.data.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -49,7 +48,7 @@ object NetworkModule {
     fun provideOkHttpClient(
         httpLogging: HttpLoggingInterceptor,
     ) = OkHttpClient.Builder()
-        .addInterceptor(TokenHeaderInterceptor())
+        //.addInterceptor(TokenHeaderInterceptor())
         .addInterceptor(httpLogging)
         .addInterceptor(CurlInterceptor(Timber::d))
         .build()
@@ -73,11 +72,11 @@ object NetworkModule {
     }
 
     private object UrlVersions {
-        const val RELEASE_DOMAIN = "http://release.ru"
-        const val DEBUG_DOMAIN = "http://stage.ru"
+        const val RELEASE_DOMAIN = "https://run.mocky.io"
+        const val DEBUG_DOMAIN = RELEASE_DOMAIN
 
-        const val BASE_PORT = ":4433"
+        const val BASE_PORT = ""
 
-        const val BASE_PATH = "/api/v1/"
+        const val BASE_PATH = "/v3/"
     }
 }

@@ -15,12 +15,13 @@ dependencies {
 
     // Feature dependencies
     api (projects.features.main.api)
-    //implementation (projects.features.main.domain)
-    //implementation (projects.features.main.data)
+    implementation (projects.features.main.domain)
+    implementation (projects.features.main.data)
 
     // Common dependencies
     implementation (projects.common.data)
     implementation (projects.common.navigation)
+    api (projects.core.domain)
     implementation (projects.core.presentation)
     implementation (projects.core.utils)
 

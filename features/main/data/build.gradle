@@ -1,0 +1,33 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.features.main.data'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+    implementation libs.bundles.retrofitBundle
+    implementation libs.bundles.moshiBundle
+    implementation libs.bundles.okhttpBundle
+    implementation libs.moshiAdapters
+    kapt libs.moshiCodegen
+
+    kapt           libs.hiltCompiler
+    implementation libs.hiltAndroid
+
+    implementation libs.datastore
+    implementation libs.timber
+
+    implementation (projects.core.utils)
+    implementation (projects.common.data)
+
+    implementation (projects.features.main.domain)
+    api (projects.features.main.api)
+
+}
