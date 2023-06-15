@@ -150,13 +150,11 @@ class ActionToolbar @JvmOverloads constructor(
 
     fun showCityAndDateMode(show: Boolean) {
         if (show) {
-            setSrcBackIcon(R.drawable.ic_place_pin)
             setCityAndDateTitleVisibility(View.VISIBLE)
-            setBaseTitleTextVisibility(View.GONE)
+            setBaseTitleVisibility(View.GONE)
         } else {
-            setSrcBackIcon(R.drawable.ic_arrow_back)
             setCityAndDateTitleVisibility(View.GONE)
-            setBaseTitleTextVisibility(View.VISIBLE)
+            setBaseTitleVisibility(View.VISIBLE)
         }
     }
 
@@ -168,7 +166,7 @@ class ActionToolbar @JvmOverloads constructor(
         binding.grCityAndDate.visibility = visibility
     }
 
-    private fun setBaseTitleTextVisibility(visibility: Int) {
-        binding.tvBaseTitle.visibility = visibility
+    private fun setBaseTitleVisibility(visibility: Int) {
+        binding.grBaseTitle.visibility = visibility
     }
 }

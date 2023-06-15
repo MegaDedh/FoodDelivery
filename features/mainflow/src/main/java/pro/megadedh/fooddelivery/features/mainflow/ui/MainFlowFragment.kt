@@ -11,10 +11,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import pro.megadedh.core.ui.screen.RootFragment
-import pro.megadedh.fooddelivery.features.mainflow.utils.changeTab
-import pro.megadedh.fooddelivery.features.mainflow.viewmodel.MainFlowViewModel
+import pro.megadedh.core.ui.utils.showSimpleDialog
+import pro.megadedh.fooddelivery.common.ui.utils.changeTab
 import pro.megadedh.fooddelivery.features.mainflow.R
 import pro.megadedh.fooddelivery.features.mainflow.databinding.FragmentMainFlowBinding
+import pro.megadedh.fooddelivery.features.mainflow.viewmodel.MainFlowViewModel
 
 @AndroidEntryPoint
 class MainFlowFragment : RootFragment(R.layout.fragment_main_flow) {
@@ -26,7 +27,6 @@ class MainFlowFragment : RootFragment(R.layout.fragment_main_flow) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
         selectStartScreen()
     }
@@ -36,6 +36,18 @@ class MainFlowFragment : RootFragment(R.layout.fragment_main_flow) {
             setOnItemSelectedListener(::bottomNavigationItemSelect)
             setOnItemReselectedListener(::bottomNavigationItemSelect)
         }
+    }
+
+    override fun onBackPressed() {
+        showSimpleDialog(
+            style = R.style.Dish_MaterialComponents_MaterialAlertDialog,
+            messageResId = R.string.exit_dialog_msg,
+            positiveButtonTextResId = R.string.yes,
+            negativeButtonTextResId = R.string.no,
+            onPositiveClick = { _, _ ->
+                super.onBackPressed()
+            }
+        )
     }
 
     private fun selectStartScreen() {

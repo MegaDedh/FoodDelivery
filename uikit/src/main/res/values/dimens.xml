@@ -6,6 +6,7 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
 
     <dimen name="spacing_0">0dp</dimen>
     <dimen name="spacing_1">1dp</dimen>
@@ -29,6 +30,13 @@
     <dimen name="spacing_40">40dp</dimen>
     <dimen name="spacing_46">46dp</dimen>
     <dimen name="spacing_48">48dp</dimen>
+
+    <!-- BaseScreenDimens -->
+    <dimen name="screen_margin_top">8dp</dimen>
+    <dimen name="screen_margin_horizontal">16dp</dimen>
+
+    <dimen name="item_card_corner_radius">10dp</dimen>
+    <dimen name="item_card_elevation">8dp</dimen>
 
     <!-- Toolbar -->
     <dimen name="toolbar_height">56dp</dimen>

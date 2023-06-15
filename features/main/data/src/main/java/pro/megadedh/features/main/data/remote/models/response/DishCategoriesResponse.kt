@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class DishCategoriesResponse(
-    @Json(name = "categories")
+    @Json(name = "сategories")
     val categories: List<DishCategoryResponse>,
 )
 

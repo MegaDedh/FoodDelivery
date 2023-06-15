@@ -31,5 +31,6 @@ dependencies {
     implementation libs.livedata
     kapt           libs.hiltCompiler
     implementation libs.coil
+    implementation libs.adapterDelegate
     implementation libs.timber
 }

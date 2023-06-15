@@ -1,4 +1,4 @@
-package pro.megadedh.fooddelivery.features.mainflow.utils
+package pro.megadedh.fooddelivery.common.ui.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager

@@ -2,7 +2,9 @@ package pro.megadedh.fooddelivery.features.main.api.presentation
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-interface MainScreens {
+interface DishScreens {
 
-    fun mainScreen(): FragmentScreen
+    fun mainDishScreen(): FragmentScreen
+
+    fun dishesScreen(dishCategory: Int): FragmentScreen
 }

@@ -8,16 +8,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import pro.megadedh.core.presentation.utils.NetworkExceptionProvider
 import pro.megadedh.core.presentation.viewmodel.BaseViewModel
 import pro.megadedh.fooddelivery.common.data.network.executor.ApiException
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.DishCategory
+import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.api.presentation.DishScreens
 import pro.megadedh.fooddelivery.features.main.api.usecases.DishesUseCase
 import pro.megadedh.fooddelivery.features.main.presentation.model.FeatureUiState
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class DishesViewModel @Inject constructor(
     private val mainScreens: DishScreens,
-    private val getAllCategoriesUseCase: DishesUseCase.GetAllCategoriesUseCase,
     private val getDishesUseCase: DishesUseCase.GetDishesUseCase,
     private val networkException: NetworkExceptionProvider,
 ) : BaseViewModel() {
@@ -25,12 +24,12 @@ class MainViewModel @Inject constructor(
     private var _viewState: MutableLiveData<FeatureUiState> = MutableLiveData()
     val viewState: LiveData<FeatureUiState> get() = _viewState
 
-    private var _dishCategoryList: MutableLiveData<List<DishCategory>?> = MutableLiveData()
-    val dishCategoryList: LiveData<List<DishCategory>?> get() = _dishCategoryList
+    private var _dishList: MutableLiveData<List<Dish>?> = MutableLiveData()
+    val dishList: LiveData<List<Dish>?> get() = _dishList
 
-    init {
+    fun init(dishCategory: Int) {
         viewModelScope.launchHandling {
-            _dishCategoryList.postValue(getAllCategoriesUseCase(Unit))
+           _dishList.postValue(getDishesUseCase(Unit))
         }
     }
 
@@ -38,7 +37,6 @@ class MainViewModel @Inject constructor(
         super.handleException(e)
         val message = when (e) {
             is ApiException.Connection -> networkException.connectionError
-
             is ApiException.Response,
             is ApiException.Communication -> networkException.serverError
 
@@ -47,7 +45,14 @@ class MainViewModel @Inject constructor(
         _viewState.postValue(FeatureUiState.Exception(message))
     }
 
-    fun onCategoryClick(categoryId: Int): FragmentScreen {
-        return mainScreens.dishesScreen(categoryId)
+    fun onDishClick(dishId: Int) {
+        TODO()
     }
+
+    override fun back() {
+        router.navigateTo(mainScreens.mainDishScreen())
+    }
+
+    fun onBackPressed():FragmentScreen = mainScreens.mainDishScreen()
+
 }
