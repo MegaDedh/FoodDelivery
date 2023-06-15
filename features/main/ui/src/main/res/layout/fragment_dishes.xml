@@ -11,12 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTags"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/item_card_dish_category_divider_margin"
+        android:layout_height="@dimen/spacing_40"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_8"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/view_dish_tag_item"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDishes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/item_card_dish_category_divider_margin"
+        android:layout_marginTop="@dimen/spacing_16"
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginEnd="@dimen/spacing_8"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -24,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/rvTags"
         tools:listitem="@layout/view_dish_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

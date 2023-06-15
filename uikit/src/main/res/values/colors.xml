@@ -9,5 +9,6 @@
 
     <color name="grayscale1_A5A9B2">#A5A9B2</color>
     <color name="grayscale2_80000000">#80000000</color>
+    <color name="grayscale3_99000000">#99000000</color>
 
 </resources>

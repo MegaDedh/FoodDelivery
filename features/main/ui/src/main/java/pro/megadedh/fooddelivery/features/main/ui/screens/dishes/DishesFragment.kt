@@ -3,6 +3,8 @@ package pro.megadedh.fooddelivery.features.main.ui.screens.dishes
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,10 +18,13 @@ import pro.megadedh.fooddelivery.common.ui.utils.changeTab
 import pro.megadedh.fooddelivery.core.utils.extentions.unsafeLazy
 import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.presentation.DishesViewModel
+import pro.megadedh.fooddelivery.features.main.presentation.model.FeatureUiState
 import pro.megadedh.fooddelivery.features.main.ui.R
 import pro.megadedh.fooddelivery.features.main.ui.databinding.FragmentDishesBinding
 import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler.DishListAdapter
 import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler.DishViewHolderModel
+import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagAdapter
+import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagViewHolderModel
 
 @AndroidEntryPoint
 class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
@@ -34,6 +39,12 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
     private val dishListAdapter by unsafeLazy {
         DishListAdapter(
             onDishClick = viewModel::onDishClick,
+        )
+    }
+
+    private val dishTagAdapter by unsafeLazy {
+        DishTagAdapter(
+            onTagClick = viewModel::onTagClick,
         )
     }
 
@@ -64,6 +75,8 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
         binding.rvDishes.addItemDecoration(horizontalDecorator)
         binding.rvDishes.addItemDecoration(verticalDecorator)
         binding.rvDishes.adapter = dishListAdapter
+
+        binding.rvTags.adapter = dishTagAdapter
     }
 
     private fun setupToolbar() {
@@ -80,16 +93,37 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
 
     private fun setupObservers() = with(viewModel) {
         observe(dishList, ::observeDishList)
+        observe(dishTags, ::observeDishTags)
         observe(account, ::observeAccount)
-        // observe(viewState, ::handleState)
+        observe(viewState, ::handleState)
     }
 
     private fun observeDishList(param: List<Dish>?) {
         param?.map(::DishViewHolderModel).let(dishListAdapter::setItems)
     }
 
+    private fun observeDishTags(param: List<String>?) {
+        param?.map(::DishTagViewHolderModel).let(dishTagAdapter::setItems)
+    }
+
     private fun observeAccount(account: UserAccount) {
         binding.toolbar.setAccountImageFromUrl(account.avatar)
+    }
+
+    private fun handleState(param:FeatureUiState){
+        when (param){
+            is FeatureUiState.ShowDish ->
+                showDishDialog(param.dish)
+            is FeatureUiState.Exception ->
+                Toast.makeText(requireContext(),param.message,LENGTH_LONG).show()
+
+            else -> {}
+        }
+    }
+
+    private fun showDishDialog(dish:Dish){
+
+        DishDialog.show(childFragmentManager,dish)
     }
 
     companion object {

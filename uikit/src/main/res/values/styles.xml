@@ -45,6 +45,11 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
+    <style name="BaseTextStyle.Medium.16" parent="BaseTextStyle">
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
     <style name="BaseTextStyle.Medium.Large" parent="BaseTextStyle.Medium">
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
@@ -57,6 +62,27 @@
 
     <style name="BottomNavigationTextActivate">
         <item name="fontFamily">@font/sf_pro_display_medium</item>
+    </style>
+
+
+    <style name="ButtonTag" >
+        <item name="backgroundTint">@drawable/btn_background_selector</item>
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textColor">@color/tag_button_text_color</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:checkable">true</item>
+    </style>
+
+    <!-- Button -->
+    <style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary_blue_3364E0</item>
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="BottomNavigationTextInactivate" parent="BottomNavigationTextActivate" />

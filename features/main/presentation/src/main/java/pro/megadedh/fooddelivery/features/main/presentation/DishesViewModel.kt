@@ -33,9 +33,14 @@ class DishesViewModel @Inject constructor(
     private var _account: MutableLiveData<UserAccount> = MutableLiveData()
     val account: LiveData<UserAccount> get() = _account
 
+    private var _dishTags: MutableLiveData<List<String>> = MutableLiveData()
+    val dishTags: LiveData<List<String>> get() = _dishTags
+
     fun init(dishCategory: Int) {
         viewModelScope.launchHandling {
-           _dishList.postValue(getDishesUseCase(Unit))
+            val dishesList = getDishesUseCase(Unit)
+            _dishList.postValue(dishesList)
+            _dishTags.postValue(getDistinctTags(dishesList))
         }
 
         _account.postValue(userCredentialManager.getProfile())
@@ -54,13 +59,18 @@ class DishesViewModel @Inject constructor(
     }
 
     fun onDishClick(dish: Dish) {
-        TODO()
+        _viewState.postValue(FeatureUiState.ShowDish(dish))
     }
 
-    override fun back() {
-        router.navigateTo(mainScreens.mainDishScreen())
+    fun onTagClick(tag: String) {
+        //TODO()
     }
 
-    fun onBackPressed():FragmentScreen = mainScreens.mainDishScreen()
+    fun onBackPressed(): FragmentScreen = mainScreens.mainDishScreen()
 
+    private fun getDistinctTags(dishesList: List<Dish>): List<String> {
+        val allTags = mutableListOf<String>()
+        dishesList.map { it.tags.forEach(allTags::add) }
+        return allTags.distinct()
+    }
 }

@@ -1,5 +1,9 @@
 package pro.megadedh.fooddelivery.features.main.api.domain.model.result
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Dish(
     val id: Int,
     val name: String,
@@ -8,4 +12,4 @@ data class Dish(
     val description: String,
     val imageUrl: String,
     val tags: List<String>,
-)
+) : Parcelable
