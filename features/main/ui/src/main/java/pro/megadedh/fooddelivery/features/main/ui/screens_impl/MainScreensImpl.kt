@@ -12,7 +12,10 @@ class MainScreensImpl @Inject constructor() : DishScreens {
         MainFragment.newInstance()
     }
 
-    override fun dishesScreen(dishCategory: Int): FragmentScreen = FragmentScreen {
-        DishesFragment.newInstance(dishCategory)
+    override fun dishesScreen(
+        dishCategory: Int,
+        categoryName: String
+    ): FragmentScreen = FragmentScreen {
+        DishesFragment.newInstance(dishCategory, categoryName)
     }
 }

@@ -28,6 +28,7 @@ dependencies {
 //    implementation libs.datastore
 //    implementation libs.bundles.roomBundle
 
+    implementation(projects.common.api)
     implementation(projects.common.presentation)
     implementation(projects.common.navigation)
     implementation(projects.common.utils)

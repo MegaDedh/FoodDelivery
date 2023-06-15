@@ -20,6 +20,7 @@ dependencies {
     // Common dependencies
     implementation (projects.core.ui)
     implementation (projects.core.presentation)
+    implementation (projects.common.api)
     implementation (projects.common.ui)
     implementation (projects.uikit)
 

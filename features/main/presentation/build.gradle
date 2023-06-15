@@ -19,6 +19,7 @@ dependencies {
     implementation (projects.features.main.data)
 
     // Common dependencies
+    implementation (projects.common.api)
     implementation (projects.common.data)
     implementation (projects.common.navigation)
     api (projects.core.domain)

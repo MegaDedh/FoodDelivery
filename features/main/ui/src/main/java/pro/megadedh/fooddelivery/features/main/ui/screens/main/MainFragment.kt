@@ -5,14 +5,15 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.ui.screen.BaseFragment
 import pro.megadedh.core.ui.utils.LifecycleOwnerUtils.observe
+import pro.megadedh.fooddelivery.common.ui.utils.changeTab
 import pro.megadedh.fooddelivery.core.utils.extentions.unsafeLazy
 import pro.megadedh.fooddelivery.features.main.api.domain.model.result.DishCategory
 import pro.megadedh.fooddelivery.features.main.presentation.MainViewModel
 import pro.megadedh.fooddelivery.features.main.ui.R
 import pro.megadedh.fooddelivery.features.main.ui.databinding.FragmentMainBinding
-import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.changeTab
 import pro.megadedh.fooddelivery.features.main.ui.screens.main.recycler.DishCategoryListAdapter
 import pro.megadedh.fooddelivery.features.main.ui.screens.main.recycler.DishCategoryViewHolderModel
 
@@ -24,8 +25,8 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     override val viewModel by viewModels<MainViewModel>()
 
     private val dishCategoryListAdapter by unsafeLazy {
-        DishCategoryListAdapter {
-            viewModel.onCategoryClick(it).let(::changeTab)
+        DishCategoryListAdapter { categoryId, categoryName ->
+            viewModel.onCategoryClick(categoryId, categoryName).let(::changeTab)
         }
     }
 
@@ -47,7 +48,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             "Санкт-Петербург",
             "12 Августа, 2030",
         )
-        binding.toolbar.setAccountImageFromUrl(ACCOUNT_IMAGE_URL)
     }
 
     private fun setupListeners() = with(binding) {
@@ -58,6 +58,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setupObservers() = with(viewModel) {
         observe(dishCategoryList, ::observeDishCategoryList)
+        observe(account, ::observeAccount)
         //observe(viewState, ::handleState)
     }
 
@@ -65,10 +66,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         param?.map(::DishCategoryViewHolderModel).let(dishCategoryListAdapter::setItems)
     }
 
-    companion object {
-        private const val ACCOUNT_IMAGE_URL =
-            "https://sun9-57.userapi.com/impg/tSn4EHBuZ-IMc31Ty3m1S3KcpxjUAMyAoA_yJA/51ylptMEdn0.jpg?size=141x136&quality=96&sign=17abc96f730813d123bb0aaa6a529a86&type=album"
+    private fun observeAccount(account: UserAccount) {
+        binding.toolbar.setAccountImageFromUrl(account.avatar)
+    }
 
+    companion object {
         fun newInstance(): MainFragment = MainFragment()
     }
 }

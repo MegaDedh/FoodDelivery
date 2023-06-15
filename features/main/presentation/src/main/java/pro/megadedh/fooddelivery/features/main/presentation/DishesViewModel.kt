@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
+import pro.megadedh.common.api.UserCredentialManager
+import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.presentation.utils.NetworkExceptionProvider
 import pro.megadedh.core.presentation.viewmodel.BaseViewModel
 import pro.megadedh.fooddelivery.common.data.network.executor.ApiException
@@ -19,6 +21,7 @@ class DishesViewModel @Inject constructor(
     private val mainScreens: DishScreens,
     private val getDishesUseCase: DishesUseCase.GetDishesUseCase,
     private val networkException: NetworkExceptionProvider,
+    private val userCredentialManager: UserCredentialManager,
 ) : BaseViewModel() {
 
     private var _viewState: MutableLiveData<FeatureUiState> = MutableLiveData()
@@ -27,10 +30,15 @@ class DishesViewModel @Inject constructor(
     private var _dishList: MutableLiveData<List<Dish>?> = MutableLiveData()
     val dishList: LiveData<List<Dish>?> get() = _dishList
 
+    private var _account: MutableLiveData<UserAccount> = MutableLiveData()
+    val account: LiveData<UserAccount> get() = _account
+
     fun init(dishCategory: Int) {
         viewModelScope.launchHandling {
            _dishList.postValue(getDishesUseCase(Unit))
         }
+
+        _account.postValue(userCredentialManager.getProfile())
     }
 
     override fun handleException(e: Throwable) {
@@ -45,7 +53,7 @@ class DishesViewModel @Inject constructor(
         _viewState.postValue(FeatureUiState.Exception(message))
     }
 
-    fun onDishClick(dishId: Int) {
+    fun onDishClick(dish: Dish) {
         TODO()
     }
 

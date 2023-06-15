@@ -4,5 +4,6 @@
     <dimen name="item_card_dish_category_divider_margin">8dp</dimen>
 
     <dimen name="item_card_dish_height">146dp</dimen>
-    <dimen name="item_card_dish_img_size">110dp</dimen>
+    <dimen name="item_card_dish_width">110dp</dimen>
+    <dimen name="item_card_dish_img_size">100dp</dimen>
 </resources>

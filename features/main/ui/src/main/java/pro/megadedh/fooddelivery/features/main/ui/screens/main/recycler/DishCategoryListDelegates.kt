@@ -5,7 +5,10 @@ import pro.megadedh.core.ui.delegates.adapter.baseAdapterDelegate
 import pro.megadedh.fooddelivery.features.main.ui.databinding.ViewDishCategoryItemBinding
 
 fun dishCategoryDelegate(
-    onDishCategoryClick: (categoryId: Int) -> Unit,
+    onDishCategoryClick: (
+        categoryId: Int,
+        categoryName:String,
+    ) -> Unit,
 ) =
     baseAdapterDelegate<DishCategoryViewHolderModel, ViewDishCategoryItemBinding>(
         viewBinding = { layoutInflater, parent ->
@@ -17,7 +20,7 @@ fun dishCategoryDelegate(
                 with(binding) {
                     ivDishCategory.load(imageUrl)
                     tvDishCategoryName.text = name
-                    root.setOnClickListener { onDishCategoryClick(id) }
+                    root.setOnClickListener { onDishCategoryClick(id, name) }
                 }
             }
         }

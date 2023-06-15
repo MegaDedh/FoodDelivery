@@ -27,7 +27,7 @@ fun FragmentManager.changeTab(
                 newTab.screenKey,
             )
         }
-        currentFragment?.let(::hide)
+        currentFragment?.let(::remove) // TODO(::hide)
         newFragment?.let(::show)
     }
 }

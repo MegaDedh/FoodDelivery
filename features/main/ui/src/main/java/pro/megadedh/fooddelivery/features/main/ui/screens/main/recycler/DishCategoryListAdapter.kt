@@ -4,7 +4,7 @@ import pro.megadedh.core.ui.delegates.adapter.BaseAsyncListDifferDelegationAdapt
 import pro.megadedh.core.ui.delegates.viewholder.ViewHolderModel
 
 class DishCategoryListAdapter(
-    private val onCategoryClick: (categoryId: Int) -> Unit,
+    private val onCategoryClick: (categoryId: Int, categoryName:String) -> Unit,
 ): BaseAsyncListDifferDelegationAdapter<ViewHolderModel>() {
 
     init {

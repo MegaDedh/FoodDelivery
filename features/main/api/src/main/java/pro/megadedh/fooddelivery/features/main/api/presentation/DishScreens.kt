@@ -6,5 +6,5 @@ interface DishScreens {
 
     fun mainDishScreen(): FragmentScreen
 
-    fun dishesScreen(dishCategory: Int): FragmentScreen
+    fun dishesScreen(dishCategory: Int, categoryName:String): FragmentScreen
 }
