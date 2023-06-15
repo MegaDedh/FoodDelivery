@@ -3,13 +3,11 @@ package pro.megadedh.fooddelivery.features.main.ui.screens.dishes
 import android.content.res.Resources.NotFoundException
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
+import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.ui.screen.BaseFragment
 import pro.megadedh.core.ui.utils.LifecycleOwnerUtils.observe
 import pro.megadedh.core.ui.utils.args
@@ -27,6 +25,7 @@ import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler.DishVi
 class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
 
     private var dishCategory by args<Int>()
+    private var categoryName by args<String>()
 
     override val binding by viewBinding(FragmentDishesBinding::bind)
 
@@ -48,10 +47,11 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
         setupDishList()
         setupListeners()
         setupObservers()
+        setupToolbar()
     }
 
     private fun setupDishList() {
-        //   val verticalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        val verticalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         val horizontalDecorator =
             DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
 
@@ -59,10 +59,15 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
             R.drawable.shape_divider
         ) ?: throw NotFoundException()
 
-        //  verticalDecorator.setDrawable(divider)
+        verticalDecorator.setDrawable(divider)
         horizontalDecorator.setDrawable(divider)
         binding.rvDishes.addItemDecoration(horizontalDecorator)
+        binding.rvDishes.addItemDecoration(verticalDecorator)
         binding.rvDishes.adapter = dishListAdapter
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setBaseTitleText(categoryName)
     }
 
     private fun setupListeners() {
@@ -75,6 +80,7 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
 
     private fun setupObservers() = with(viewModel) {
         observe(dishList, ::observeDishList)
+        observe(account, ::observeAccount)
         // observe(viewState, ::handleState)
     }
 
@@ -82,14 +88,17 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
         param?.map(::DishViewHolderModel).let(dishListAdapter::setItems)
     }
 
+    private fun observeAccount(account: UserAccount) {
+        binding.toolbar.setAccountImageFromUrl(account.avatar)
+    }
+
     companion object {
-        fun newInstance(dishCategory: Int): DishesFragment = DishesFragment().apply {
+        fun newInstance(
+            dishCategory: Int,
+            categoryName: String,
+        ): DishesFragment = DishesFragment().apply {
             this.dishCategory = dishCategory
+            this.categoryName = categoryName
         }
     }
-}
-
-fun Fragment.changeTab(newTab: FragmentScreen) {
-    val container = requireView().parent as? ViewGroup ?: return
-    parentFragmentManager.changeTab(newTab, container.id)
 }
