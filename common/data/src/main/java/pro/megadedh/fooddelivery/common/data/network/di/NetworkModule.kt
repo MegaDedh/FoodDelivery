@@ -72,7 +72,7 @@ object NetworkModule {
     }
 
     private object UrlVersions {
-        const val RELEASE_DOMAIN = "https://run.mocky.io"
+        const val RELEASE_DOMAIN = "https://run.mocky.io" //"https://185.42.117.109"
         const val DEBUG_DOMAIN = RELEASE_DOMAIN
 
         const val BASE_PORT = ""

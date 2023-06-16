@@ -19,6 +19,7 @@ rootProject.name = "FoodDelivery"
 include ':app'
 
 include ':common'
+include ':common:api'
 include ':common:data'
 include ':common:navigation'
 include ':common:presentation'

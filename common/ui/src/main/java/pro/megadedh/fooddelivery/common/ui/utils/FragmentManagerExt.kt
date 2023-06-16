@@ -1,4 +1,4 @@
-package pro.megadedh.fooddelivery.features.mainflow.utils
+package pro.megadedh.fooddelivery.common.ui.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
@@ -27,7 +27,7 @@ fun FragmentManager.changeTab(
                 newTab.screenKey,
             )
         }
-        currentFragment?.let(::hide)
+        currentFragment?.let(::remove) // TODO(::hide)
         newFragment?.let(::show)
     }
 }

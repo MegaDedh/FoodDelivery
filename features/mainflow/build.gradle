@@ -16,6 +16,8 @@ dependencies {
     // Common
     implementation (projects.core.ui)
     implementation (projects.core.presentation)
+    implementation (projects.common.navigation)
+    implementation (projects.common.ui)
     implementation (projects.uikit)
 
     implementation (projects.features.main.api)

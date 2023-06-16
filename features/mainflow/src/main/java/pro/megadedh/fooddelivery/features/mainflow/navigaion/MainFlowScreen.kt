@@ -3,13 +3,14 @@ package pro.megadedh.fooddelivery.features.mainflow.navigaion
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 interface MainFlowScreen {
+
     fun mainFlowScreen(): FragmentScreen
 
-    fun mainScreen1(): FragmentScreen
+    fun mainDishScreen(): FragmentScreen
 
-    fun mainScreen2(): FragmentScreen
+    fun mainSearchScreen(): FragmentScreen
 
-    fun mainScreen3(): FragmentScreen
+    fun mainBasketScreen(): FragmentScreen
 
-    fun mainScreen4(): FragmentScreen
+    fun mainAccountScreen(): FragmentScreen
 }
