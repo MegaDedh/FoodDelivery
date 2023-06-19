@@ -2,7 +2,7 @@ package pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler
 
 import coil.load
 import pro.megadedh.core.ui.delegates.adapter.baseAdapterDelegate
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
+import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.ui.databinding.ViewDishItemBinding
 
 fun dishDelegate(

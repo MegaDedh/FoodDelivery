@@ -1,0 +1,26 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.database'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+    kapt libs.hiltCompiler
+    implementation libs.hilt
+    implementation libs.hiltAndroid
+
+    implementation libs.bundles.roomBundle
+    kapt           libs.roomCompiler
+
+    implementation libs.moshiAdapters
+    kapt libs.moshiCodegen
+
+    implementation (projects.core.utils)
+}

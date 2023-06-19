@@ -16,7 +16,8 @@ import pro.megadedh.core.ui.utils.args
 import pro.megadedh.core.ui.utils.getDrawableResourcesCompat
 import pro.megadedh.fooddelivery.common.ui.utils.changeTab
 import pro.megadedh.fooddelivery.core.utils.extentions.unsafeLazy
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
+import pro.megadedh.fooddelivery.features.basket.api.presentation.model.BasketItem
+import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.presentation.DishesViewModel
 import pro.megadedh.fooddelivery.features.main.presentation.model.FeatureUiState
 import pro.megadedh.fooddelivery.features.main.ui.R
@@ -27,10 +28,13 @@ import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagAda
 import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagViewHolderModel
 
 @AndroidEntryPoint
-class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
+class DishesFragment :
+    BaseFragment(R.layout.fragment_dishes),
+    DishDialog.ClickDialogListener {
 
     private var dishCategory by args<Int>()
     private var categoryName by args<String>()
+    private var basket = emptyList<BasketItem>()
 
     override val binding by viewBinding(FragmentDishesBinding::bind)
 
@@ -62,7 +66,8 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
     }
 
     private fun setupDishList() {
-        val verticalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        val verticalDecorator =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         val horizontalDecorator =
             DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
 
@@ -95,6 +100,7 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
         observe(dishList, ::observeDishList)
         observe(dishTags, ::observeDishTags)
         observe(account, ::observeAccount)
+        observe(basket, ::observeBasket)
         observe(viewState, ::handleState)
     }
 
@@ -110,20 +116,35 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
         binding.toolbar.setAccountImageFromUrl(account.avatar)
     }
 
-    private fun handleState(param:FeatureUiState){
-        when (param){
+    private fun observeBasket(param: List<BasketItem>) {
+        basket = param
+    }
+
+
+    private fun handleState(param: FeatureUiState) {
+        when (param) {
             is FeatureUiState.ShowDish ->
                 showDishDialog(param.dish)
+
             is FeatureUiState.Exception ->
-                Toast.makeText(requireContext(),param.message,LENGTH_LONG).show()
+                Toast.makeText(requireContext(), param.message, LENGTH_LONG).show()
 
             else -> {}
         }
     }
 
-    private fun showDishDialog(dish:Dish){
+    private fun showDishDialog(dish: Dish) {
+        val basketContainsDish = basket.any { it.id == dish.id }
 
-        DishDialog.show(childFragmentManager,dish)
+        DishDialog.show(
+            childFragmentManager,
+            dish,
+            basketContainsDish,
+        )
+    }
+
+    override fun onDialogAddDishClick(dish: Dish) {
+        viewModel.onAddFromBasket(dish)
     }
 
     companion object {
@@ -135,4 +156,5 @@ class DishesFragment : BaseFragment(R.layout.fragment_dishes) {
             this.categoryName = categoryName
         }
     }
+
 }

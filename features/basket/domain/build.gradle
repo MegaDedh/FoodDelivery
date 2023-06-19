@@ -1,0 +1,27 @@
+plugins {
+    alias libs.plugins.androidLibrary
+    alias libs.plugins.kotlinAndroid
+    alias libs.plugins.kapt
+    alias libs.plugins.hiltAndroid
+}
+
+android {
+    namespace 'pro.megadedh.fooddelivery.features.basket.domain'
+}
+
+apply from: "$project.rootDir/config/module-config.gradle"
+
+dependencies {
+    api (projects.features.main.api)
+    api (projects.common.api)
+    api (projects.features.basket.api)
+    api (projects.core.domain)
+
+    kapt           libs.daggerJvmCompiler
+    implementation libs.daggerJvm
+    kapt           libs.hiltCompiler
+    implementation libs.hiltAndroid
+
+    implementation libs.coroutinesCore
+    implementation libs.timber
+}

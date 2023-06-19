@@ -12,11 +12,15 @@ import pro.megadedh.fooddelivery.common.presentation.utils.NetworkExceptionProvi
 import pro.megadedh.fooddelivery.common.utils.DispatchersProviderImpl
 import pro.megadedh.fooddelivery.core.utils.dispatchers.DispatchersProvider
 import pro.megadedh.fooddelivery.credentialmanager.UserCredentialManagerImpl
+import pro.megadedh.fooddelivery.features.basket.api.usecase.BasketUseCase
+import pro.megadedh.fooddelivery.features.basket.domain.usecase.AddDishInBasketUseCaseImpl
+import pro.megadedh.fooddelivery.features.basket.domain.usecase.GetBasketImpl
 import javax.inject.Singleton
 
 @Module(
     includes = [
         AppModule.AppBinds::class,
+        DatabaseModule::class,
         ScreensModule::class,
     ]
 )
@@ -50,5 +54,17 @@ class AppModule {
         fun bindUserCredentionManager(
             userCredentialManagerImpl: UserCredentialManagerImpl,
         ): UserCredentialManager
+
+        @Binds
+        @Singleton
+        fun bindAddDishInBasketUseCase(
+            impl: AddDishInBasketUseCaseImpl,
+        ): BasketUseCase.AddDishInBasketUseCase
+
+        @Binds
+        @Singleton
+        fun bindGetBasketUseCase(
+            impl: GetBasketImpl,
+        ): BasketUseCase.GetBasketUseCase
     }
 }

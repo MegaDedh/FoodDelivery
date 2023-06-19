@@ -1,11 +1,11 @@
 package pro.megadedh.features.main.data.repository
 
+import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.features.main.data.remote.ApiDishService
 import pro.megadedh.features.main.data.remote.models.response.DishCategoryResponse
 import pro.megadedh.features.main.data.remote.models.response.DishResponse
 import pro.megadedh.features.main.domain.repository.DishRepository
 import pro.megadedh.fooddelivery.core.utils.mappers.Mapper
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.api.domain.model.result.DishCategory
 import javax.inject.Inject
 

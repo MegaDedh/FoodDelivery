@@ -1,4 +1,4 @@
-package pro.megadedh.fooddelivery.features.main.api.domain.model.result
+package pro.megadedh.common.api.presentation.model.result
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

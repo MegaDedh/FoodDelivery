@@ -1,0 +1,34 @@
+    plugins {
+        alias libs.plugins.androidLibrary
+        alias libs.plugins.kotlinAndroid
+        alias libs.plugins.kapt
+        alias libs.plugins.hiltAndroid
+    }
+
+    android {
+        namespace 'pro.megadedh.fooddelivery.features.basket.data'
+    }
+
+    apply from: "$project.rootDir/config/module-config.gradle"
+
+    dependencies {
+        implementation libs.bundles.retrofitBundle
+        implementation libs.bundles.moshiBundle
+        implementation libs.bundles.okhttpBundle
+        implementation libs.moshiAdapters
+        kapt libs.moshiCodegen
+
+        kapt           libs.hiltCompiler
+        implementation libs.hiltAndroid
+
+        implementation libs.timber
+
+        implementation (projects.core.utils)
+        implementation (projects.common.data)
+
+        implementation (projects.database)
+        implementation (projects.features.basket.domain)
+        api (projects.features.basket.api)
+        api (projects.common.api)
+
+    }

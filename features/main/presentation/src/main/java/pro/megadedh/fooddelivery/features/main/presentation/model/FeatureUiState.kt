@@ -1,6 +1,6 @@
 package pro.megadedh.fooddelivery.features.main.presentation.model
 
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
+import pro.megadedh.common.api.presentation.model.result.Dish
 
 sealed class FeatureUiState {
 
