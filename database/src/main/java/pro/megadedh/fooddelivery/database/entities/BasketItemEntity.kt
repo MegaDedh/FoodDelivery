@@ -3,11 +3,11 @@ package pro.megadedh.fooddelivery.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import pro.megadedh.fooddelivery.database.entities.CartEntity.Columns.ID
-import pro.megadedh.fooddelivery.database.entities.CartEntity.Companion.TABLE_NAME
+import pro.megadedh.fooddelivery.database.entities.BasketItemEntity.Columns.ID
+import pro.megadedh.fooddelivery.database.entities.BasketItemEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-data class CartEntity(
+data class BasketItemEntity(
     @PrimaryKey
     @ColumnInfo(ID)
     val id: String,

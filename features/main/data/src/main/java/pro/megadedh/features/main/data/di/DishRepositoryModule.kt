@@ -14,7 +14,7 @@ interface DishRepositoryModule {
 
     @Binds
     @Singleton
-    fun bindRepository(
+    fun bindDishRepository(
         dishRepositoryImpl: DishRepositoryImpl
     ): DishRepository
 }

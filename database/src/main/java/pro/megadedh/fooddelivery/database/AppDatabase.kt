@@ -8,12 +8,12 @@ import pro.megadedh.fooddelivery.database.AppDatabase.Config.EXPORT_SCHEME
 import pro.megadedh.fooddelivery.database.AppDatabase.Config.VERSION
 import pro.megadedh.fooddelivery.database.converters.CartConverters
 import pro.megadedh.fooddelivery.database.converters.CommonConverters
-import pro.megadedh.fooddelivery.database.dao.CartDao
-import pro.megadedh.fooddelivery.database.entities.CartEntity
+import pro.megadedh.fooddelivery.database.dao.BasketDao
+import pro.megadedh.fooddelivery.database.entities.BasketItemEntity
 
 @Database(
     entities = [
-        CartEntity::class,
+        BasketItemEntity::class,
     ],
     version = VERSION,
     exportSchema = EXPORT_SCHEME
@@ -24,7 +24,7 @@ import pro.megadedh.fooddelivery.database.entities.CartEntity
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun cartDao(): CartDao
+    abstract fun basketDao(): BasketDao
 
     object Config {
         const val NAME = "app_database"

@@ -13,6 +13,8 @@ apply from: "$project.rootDir/config/module-config.gradle"
 
 dependencies {
     api (projects.features.main.api)
+    api (projects.common.api)
+    api (projects.features.basket.api)
     api (projects.core.domain)
 
     kapt           libs.daggerJvmCompiler

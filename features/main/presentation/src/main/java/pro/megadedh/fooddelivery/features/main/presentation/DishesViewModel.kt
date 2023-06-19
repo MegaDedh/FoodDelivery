@@ -5,12 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import pro.megadedh.common.api.UserCredentialManager
 import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.presentation.utils.NetworkExceptionProvider
 import pro.megadedh.core.presentation.viewmodel.BaseViewModel
 import pro.megadedh.fooddelivery.common.data.network.executor.ApiException
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
+import pro.megadedh.fooddelivery.features.basket.api.presentation.model.BasketItem
+import pro.megadedh.common.api.presentation.model.result.Dish
+import pro.megadedh.fooddelivery.features.basket.api.usecase.BasketUseCase
 import pro.megadedh.fooddelivery.features.main.api.presentation.DishScreens
 import pro.megadedh.fooddelivery.features.main.api.usecases.DishesUseCase
 import pro.megadedh.fooddelivery.features.main.presentation.model.FeatureUiState
@@ -20,6 +24,8 @@ import javax.inject.Inject
 class DishesViewModel @Inject constructor(
     private val mainScreens: DishScreens,
     private val getDishesUseCase: DishesUseCase.GetDishesUseCase,
+    private val addDishInBasketUseCase: BasketUseCase.AddDishInBasketUseCase,
+    private val getBasketUseCase: BasketUseCase.GetBasketUseCase,
     private val networkException: NetworkExceptionProvider,
     private val userCredentialManager: UserCredentialManager,
 ) : BaseViewModel() {
@@ -36,12 +42,20 @@ class DishesViewModel @Inject constructor(
     private var _dishTags: MutableLiveData<List<String>> = MutableLiveData()
     val dishTags: LiveData<List<String>> get() = _dishTags
 
+    private var _basket: MutableLiveData<List<BasketItem>> = MutableLiveData()
+    val basket: LiveData<List<BasketItem>> get() = _basket
+
     fun init(dishCategory: Int) {
         viewModelScope.launchHandling {
             val dishesList = getDishesUseCase(Unit)
             _dishList.postValue(dishesList)
             _dishTags.postValue(getDistinctTags(dishesList))
         }
+
+        getBasketUseCase(Unit)
+            .onEach(_basket::postValue)
+            .launchIn(viewModelScope)
+
 
         _account.postValue(userCredentialManager.getProfile())
     }
@@ -63,7 +77,13 @@ class DishesViewModel @Inject constructor(
     }
 
     fun onTagClick(tag: String) {
-        //TODO()
+        //TODO(Chips-Filter)
+    }
+
+    fun onAddFromBasket(dish: Dish) {
+        viewModelScope.launchHandling {
+            addDishInBasketUseCase(dish)
+        }
     }
 
     fun onBackPressed(): FragmentScreen = mainScreens.mainDishScreen()

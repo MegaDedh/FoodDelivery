@@ -21,13 +21,15 @@ dependencies {
     kapt           libs.hiltCompiler
     implementation libs.hiltAndroid
 
-    implementation libs.datastore
     implementation libs.timber
 
     implementation (projects.core.utils)
     implementation (projects.common.data)
 
+    implementation (projects.database)
     implementation (projects.features.main.domain)
     api (projects.features.main.api)
+    api (projects.features.basket.api)
+    api (projects.common.api)
 
 }

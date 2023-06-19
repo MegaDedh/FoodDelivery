@@ -1,8 +1,8 @@
 package pro.megadedh.features.main.data.mappers.response
 
+import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.features.main.data.remote.models.response.DishResponse
 import pro.megadedh.fooddelivery.core.utils.mappers.Mapper
-import pro.megadedh.fooddelivery.features.main.api.domain.model.result.Dish
 import javax.inject.Inject
 
 class DishMapper @Inject constructor() :

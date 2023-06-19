@@ -15,6 +15,7 @@ dependencies {
 
     // Feature dependencies
     api (projects.features.main.api)
+    api (projects.features.basket.api)
     implementation (projects.features.main.domain)
     implementation (projects.features.main.data)
 

@@ -59,3 +59,5 @@ include ':features:account:ui'
 
 include ':uikit'
 include ':database'
+include ':features:basket:domain'
+include ':features:basket:data'
