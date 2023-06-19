@@ -58,3 +58,4 @@ include ':features:account:presentation'
 include ':features:account:ui'
 
 include ':uikit'
+include ':database'
