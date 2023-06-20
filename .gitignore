@@ -9,3 +9,6 @@
 .cxx
 local.properties
 common/utils/build/
+database/build/
+features/basket/data/build/
+features/basket/domain/build/

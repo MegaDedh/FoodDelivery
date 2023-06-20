@@ -14,15 +14,15 @@ apply from: "$project.rootDir/config/module-config.gradle"
 dependencies {
 
     // Feature dependencies
-    api (projects.features.search.api)
-    //implementation (projects.features.search.domain)
-    //implementation (projects.features.search.data)
+    api (projects.features.basket.api)
 
     // Common dependencies
+    implementation (projects.common.api)
     implementation (projects.common.data)
     implementation (projects.common.navigation)
     implementation (projects.core.presentation)
     implementation (projects.core.utils)
+    api (projects.core.domain)
 
     // Libs
     implementation libs.bundles.commonBundle

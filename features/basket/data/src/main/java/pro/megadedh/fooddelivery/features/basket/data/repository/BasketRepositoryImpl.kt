@@ -44,7 +44,7 @@ class BasketRepositoryImpl @Inject constructor(
         name = name,
         price = price,
         weight = weight,
-        quantity = 42, //TODO
+        quantity = quantity,
         imageUrl = imageUrl,
     )
 }

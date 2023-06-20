@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="share_exception">Не найдено приложение для отправки</string>
+
+    <string name="dish_dialog_price_template">%1$d ₽</string>
+    <string name="dish_dialog_weight_template">· %1$d г</string>
 </resources>

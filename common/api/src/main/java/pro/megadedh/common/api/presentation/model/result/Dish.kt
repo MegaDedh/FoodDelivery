@@ -12,4 +12,5 @@ data class Dish(
     val description: String,
     val imageUrl: String,
     val tags: List<String>,
+    val quantity: Int = 1,
 ) : Parcelable
