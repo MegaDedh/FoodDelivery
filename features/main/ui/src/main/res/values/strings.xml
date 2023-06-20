@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="dish_dialog_price_template">%1$d ₽</string>
-    <string name="dish_dialog_weight_template">· %1$d г</string>
     <string name="add_in_cart">Добавить в корзину</string>
+    <string name="pay">Оплатить</string>
     <string name="dish_already_in_cart">Этот товар уже в корзине</string>
 
 </resources>

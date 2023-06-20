@@ -20,7 +20,10 @@ dependencies {
     // Common dependencies
     implementation (projects.core.ui)
     implementation (projects.core.presentation)
+    implementation (projects.core.utils)
     implementation (projects.common.ui)
+    implementation (projects.common.api)
+    implementation (projects.uikit)
 
     // Libs
     implementation libs.bundles.commonBundle
@@ -29,5 +32,6 @@ dependencies {
     implementation libs.livedata
     kapt           libs.hiltCompiler
     implementation libs.coil
+    implementation libs.adapterDelegate
     implementation libs.timber
 }
