@@ -17,17 +17,32 @@ class BasketRepositoryImpl @Inject constructor(
     private val basketDao: BasketDao,
 ) : BasketRepository {
 
+    override suspend fun getDishById(id: Int): BasketItem? {
+        return basketDao.getById(id.toString())?.mapToBasketItem()
+    }
+
+    override suspend fun deleteById(id: Int) {
+        return basketDao.deleteById(id.toString())
+    }
+
     override suspend fun addDishInBasket(dish: Dish) = withContext(dispatchersProvider.io) {
         basketDao.insert(dish.mapToEntity())
     }
-
 
     override fun getBasket(): Flow<List<BasketItem>> {
         return basketDao.getAll()
             .flowOn(dispatchersProvider.io)
             .map { list ->
-            list.map { it.mapToBasketItem() }
-        }
+                list.map { it.mapToBasketItem() }
+            }
+    }
+
+    override suspend fun incrementQuantityById(dishId: Int) = withContext(dispatchersProvider.io) {
+        basketDao.incrementQuantityById(dishId.toString())
+    }
+
+    override suspend fun decrementQuantityById(dishId: Int) = withContext(dispatchersProvider.io) {
+        basketDao.decrementQuantityById(dishId.toString())
     }
 
     private fun BasketItemEntity.mapToBasketItem() = BasketItem(

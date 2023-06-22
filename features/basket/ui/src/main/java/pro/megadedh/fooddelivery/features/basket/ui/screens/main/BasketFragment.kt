@@ -9,12 +9,13 @@ import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.ui.screen.BaseFragment
 import pro.megadedh.core.ui.utils.LifecycleOwnerUtils.observe
 import pro.megadedh.fooddelivery.core.utils.extentions.unsafeLazy
-import pro.megadedh.fooddelivery.features.basket.api.presentation.model.BasketItem
 import pro.megadedh.fooddelivery.features.basket.presentation.BasketViewModel
+import pro.megadedh.fooddelivery.features.basket.presentation.model.BasketUiContent
 import pro.megadedh.fooddelivery.features.basket.ui.R
 import pro.megadedh.fooddelivery.features.basket.ui.databinding.FragmentBasketBinding
 import pro.megadedh.fooddelivery.features.basket.ui.screens.main.recycler.BasketAdapter
 import pro.megadedh.fooddelivery.features.basket.ui.screens.main.recycler.BasketViewHolderModel
+import pro.megadedh.fooddelivery.common.ui.R as CommonR
 
 @AndroidEntryPoint
 class BasketFragment : BaseFragment(R.layout.fragment_basket) {
@@ -62,12 +63,21 @@ class BasketFragment : BaseFragment(R.layout.fragment_basket) {
         //observe(viewState, ::handleState)
     }
 
-    private fun observeBasketList(param: List<BasketItem>?) {
-        param?.map(::BasketViewHolderModel).let(basketAdapter::setItems)
+    private fun observeBasketList(param: BasketUiContent?) {
+        if (param != null) {
+            param.items.map(::BasketViewHolderModel).let(basketAdapter::setItems)
+            binding.btnPay.text = btnPayText(param.price)
+        }
     }
 
     private fun observeAccount(account: UserAccount) {
         binding.toolbar.setAccountImageFromUrl(account.avatar)
+    }
+
+    private fun btnPayText(basketPrice: Int) = if (basketPrice <= 0) {
+        getString(CommonR.string.pay)
+    } else {
+        getString(CommonR.string.pay_template, basketPrice)
     }
 
     companion object {

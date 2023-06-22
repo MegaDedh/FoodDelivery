@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/spacing_4"
     android:layout_height="@dimen/item_basket_height">
 
     <androidx.cardview.widget.CardView
@@ -73,21 +74,22 @@
         tools:text="42" />
 
     <ImageView
-        android:id="@+id/ivBasketPlus"
+        android:id="@+id/ivBasketMinus"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_6"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toBottomOf="@+id/tvBasketQuantity"
         app:layout_constraintStart_toStartOf="@+id/tvBasketQuantity"
         app:layout_constraintTop_toTopOf="@+id/tvBasketQuantity" />
 
     <ImageView
-        android:id="@+id/ivBasketMinus"
+        android:id="@+id/ivBasketPlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_6"
-        android:src="@drawable/ic_minus"
+        android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@+id/tvBasketQuantity"
         app:layout_constraintEnd_toEndOf="@+id/tvBasketQuantity"
         app:layout_constraintTop_toTopOf="@+id/tvBasketQuantity" />

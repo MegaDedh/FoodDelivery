@@ -23,4 +23,10 @@ interface BasketDao : BaseDao<BasketItemEntity> {
 
     @Query("DELETE FROM $TABLE_NAME")
     override suspend fun clear()
+
+    @Query("UPDATE $TABLE_NAME SET ${BasketItemEntity.Columns.QUANTITY} = ${BasketItemEntity.Columns.QUANTITY} + 1 WHERE ${BasketItemEntity.Columns.ID}=:id")
+    suspend fun incrementQuantityById(id: String)
+
+    @Query("UPDATE $TABLE_NAME SET ${BasketItemEntity.Columns.QUANTITY} = ${BasketItemEntity.Columns.QUANTITY} - 1 WHERE ${BasketItemEntity.Columns.ID}=:id")
+    suspend fun decrementQuantityById(id: String)
 }

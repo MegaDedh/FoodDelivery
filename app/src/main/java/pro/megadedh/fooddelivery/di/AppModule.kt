@@ -54,17 +54,5 @@ class AppModule {
         fun bindUserCredentionManager(
             userCredentialManagerImpl: UserCredentialManagerImpl,
         ): UserCredentialManager
-
-        @Binds
-        @Singleton
-        fun bindAddDishInBasketUseCase(
-            impl: AddDishInBasketUseCaseImpl,
-        ): BasketUseCase.AddDishInBasketUseCase
-
-        @Binds
-        @Singleton
-        fun bindGetBasketUseCase(
-            impl: GetBasketImpl,
-        ): BasketUseCase.GetBasketUseCase
     }
 }

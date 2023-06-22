@@ -6,7 +6,15 @@ import pro.megadedh.fooddelivery.features.basket.api.presentation.model.BasketIt
 
 interface BasketRepository {
 
+    suspend fun getDishById(id: Int): BasketItem?
+
+    suspend fun deleteById(id: Int)
+
     suspend fun addDishInBasket(dish: Dish)
 
     fun getBasket(): Flow<List<BasketItem>>
+
+    suspend fun incrementQuantityById(dishId: Int)
+
+    suspend fun decrementQuantityById(dishId: Int)
 }

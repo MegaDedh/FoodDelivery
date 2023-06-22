@@ -2,7 +2,5 @@
 <resources>
 
     <string name="add_in_cart">Добавить в корзину</string>
-    <string name="pay">Оплатить</string>
     <string name="dish_already_in_cart">Этот товар уже в корзине</string>
-
 </resources>

@@ -9,4 +9,8 @@ interface BasketUseCase {
     interface AddDishInBasketUseCase : BaseUseCase.SuspendUseCase<Dish, Unit>
 
     interface GetBasketUseCase : BaseUseCase.ReactiveUseCase<Unit, List<BasketItem>>
+
+    interface IncrementDishInBasketUseCase : BaseUseCase.SuspendUseCase<Int, Unit>
+
+    interface DecrementDishInBasketUseCase : BaseUseCase.SuspendUseCase<Int, Unit>
 }

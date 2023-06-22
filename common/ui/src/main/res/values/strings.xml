@@ -4,4 +4,7 @@
 
     <string name="dish_dialog_price_template">%1$d ₽</string>
     <string name="dish_dialog_weight_template">· %1$d г</string>
+
+    <string name="pay">Оплатить</string>
+    <string name="pay_template">Оплатить %1$d ₽</string>
 </resources>

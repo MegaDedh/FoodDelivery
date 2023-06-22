@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import pro.megadedh.fooddelivery.database.entities.BasketItemEntity.Columns.ID
+import pro.megadedh.fooddelivery.database.entities.BasketItemEntity.Columns.QUANTITY
 import pro.megadedh.fooddelivery.database.entities.BasketItemEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
@@ -14,6 +15,7 @@ data class BasketItemEntity(
     val name: String,
     val price: Int,
     val weight: Int,
+    @ColumnInfo(QUANTITY)
     val quantity: Int,
     val imageUrl: String,
 ) {
@@ -23,5 +25,6 @@ data class BasketItemEntity(
 
     object Columns {
         const val ID = "id"
+        const val QUANTITY = "quantity"
     }
 }
