@@ -8,8 +8,10 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import pro.megadedh.common.api.model.UserAccount
+import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.core.ui.screen.BaseFragment
 import pro.megadedh.core.ui.utils.LifecycleOwnerUtils.observe
 import pro.megadedh.core.ui.utils.args
@@ -17,15 +19,13 @@ import pro.megadedh.core.ui.utils.getDrawableResourcesCompat
 import pro.megadedh.fooddelivery.common.ui.utils.changeTab
 import pro.megadedh.fooddelivery.core.utils.extentions.unsafeLazy
 import pro.megadedh.fooddelivery.features.basket.api.presentation.model.BasketItem
-import pro.megadedh.common.api.presentation.model.result.Dish
 import pro.megadedh.fooddelivery.features.main.presentation.DishesViewModel
 import pro.megadedh.fooddelivery.features.main.presentation.model.FeatureUiState
 import pro.megadedh.fooddelivery.features.main.ui.R
 import pro.megadedh.fooddelivery.features.main.ui.databinding.FragmentDishesBinding
 import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler.DishListAdapter
 import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.recycler.DishViewHolderModel
-import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagAdapter
-import pro.megadedh.fooddelivery.features.main.ui.screens.dishes.tags.DishTagViewHolderModel
+import pro.megadedh.fooddelivery.uikit.R as UiKitR
 
 @AndroidEntryPoint
 class DishesFragment :
@@ -46,12 +46,6 @@ class DishesFragment :
         )
     }
 
-    private val dishTagAdapter by unsafeLazy {
-        DishTagAdapter(
-            onTagClick = viewModel::onTagClick,
-        )
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.init(dishCategory)
@@ -63,6 +57,15 @@ class DishesFragment :
         setupListeners()
         setupObservers()
         setupToolbar()
+    }
+
+    private fun addChipItem(chipText: String) {
+        (layoutInflater
+            .inflate(UiKitR.layout.view_chip_item, binding.chipGroup, false) as Chip)
+            .apply {
+                text = chipText
+                binding.chipGroup.addView(this)
+            }
     }
 
     private fun setupDishList() {
@@ -80,18 +83,22 @@ class DishesFragment :
         binding.rvDishes.addItemDecoration(horizontalDecorator)
         binding.rvDishes.addItemDecoration(verticalDecorator)
         binding.rvDishes.adapter = dishListAdapter
-
-        binding.rvTags.adapter = dishTagAdapter
     }
 
     private fun setupToolbar() {
         binding.toolbar.setBaseTitleText(categoryName)
     }
 
-    private fun setupListeners() {
-        with(binding.toolbar) {
-            setOnBackClickListener {
-                viewModel.onBackPressed().let(::changeTab)
+    private fun setupListeners() = with(binding) {
+        toolbar.setOnBackClickListener {
+            viewModel.onBackPressed().let(::changeTab)
+        }
+
+        chipGroup.setOnCheckedStateChangeListener { group, checkedId ->
+            if (checkedId.isNotEmpty()) {
+                group.findViewById<Chip?>(checkedId.first())?.let {
+                    viewModel.onFilterSelect(it.text.toString())
+                }
             }
         }
     }
@@ -108,8 +115,8 @@ class DishesFragment :
         param?.map(::DishViewHolderModel).let(dishListAdapter::setItems)
     }
 
-    private fun observeDishTags(param: List<String>?) {
-        param?.map(::DishTagViewHolderModel).let(dishTagAdapter::setItems)
+    private fun observeDishTags(tags: List<String>?) {
+        tags?.forEach(::addChipItem)
     }
 
     private fun observeAccount(account: UserAccount) {
@@ -119,7 +126,6 @@ class DishesFragment :
     private fun observeBasket(param: List<BasketItem>) {
         basket = param
     }
-
 
     private fun handleState(param: FeatureUiState) {
         when (param) {
@@ -135,7 +141,6 @@ class DishesFragment :
 
     private fun showDishDialog(dish: Dish) {
         val basketContainsDish = basket.any { it.id == dish.id }
-
         DishDialog.show(
             childFragmentManager,
             dish,
@@ -156,5 +161,4 @@ class DishesFragment :
             this.categoryName = categoryName
         }
     }
-
 }

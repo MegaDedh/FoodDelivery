@@ -1,5 +1,6 @@
 package pro.megadedh.fooddelivery.features.main.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -76,8 +77,9 @@ class DishesViewModel @Inject constructor(
         _viewState.postValue(FeatureUiState.ShowDish(dish))
     }
 
-    fun onTagClick(tag: String) {
+    fun onFilterSelect(text:String){
         //TODO(Chips-Filter)
+        Log.d("XXX","TODO Filter: $text")
     }
 
     fun onAddFromBasket(dish: Dish) {
