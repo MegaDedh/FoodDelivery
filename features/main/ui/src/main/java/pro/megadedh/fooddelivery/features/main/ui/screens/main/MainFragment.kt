@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.toImmutableList
 import pro.megadedh.common.api.model.UserAccount
 import pro.megadedh.core.ui.screen.BaseFragment
 import pro.megadedh.core.ui.utils.LifecycleOwnerUtils.observe
@@ -33,41 +35,47 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDishCategoryList()
-        setupToolbar()
-        setupListeners()
+     //   setupToolbar()
+     //   setupListeners()
         setupObservers()
     }
 
     private fun setupDishCategoryList() {
         binding.rvDishCategory.adapter = dishCategoryListAdapter
+        binding.mainBackdrop.load(R.drawable.banner)
     }
 
     private fun setupToolbar() {
         // TODO ("Fetch data")
-        binding.toolbar.setCityAndDateTitle(
-            "Санкт-Петербург",
-            "12 Августа, 2030",
-        )
+      //  binding.toolbar.setCityAndDateTitle(
+//            "Санкт-Петербург",
+//            "12 Августа, 2030",
+//        )
     }
 
-    private fun setupListeners() = with(binding) {
-        with(toolbar) {
-            setOnBackClickListener { viewModel.back() }
-        }
-    }
+//    private fun setupListeners() = with(binding) {
+//        with(toolbar) {
+//            setOnBackClickListener { viewModel.back() }
+//        }
+//    }
 
     private fun setupObservers() = with(viewModel) {
         observe(dishCategoryList, ::observeDishCategoryList)
-        observe(account, ::observeAccount)
+    //    observe(account, ::observeAccount)
         //observe(viewState, ::handleState)
     }
 
-    private fun observeDishCategoryList(param: List<DishCategory>?) {
-        param?.map(::DishCategoryViewHolderModel).let(dishCategoryListAdapter::setItems)
+    private fun observeDishCategoryList(inputParam: List<DishCategory>?) {
+
+        val param :MutableList<DishCategory> = inputParam as MutableList<DishCategory>
+        param.addAll(inputParam)
+
+
+        param.toImmutableList()?.map(::DishCategoryViewHolderModel).let(dishCategoryListAdapter::setItems)
     }
 
     private fun observeAccount(account: UserAccount) {
-        binding.toolbar.setAccountImageFromUrl(account.avatar)
+     //   binding.toolbar.setAccountImageFromUrl(account.avatar)
     }
 
     companion object {
